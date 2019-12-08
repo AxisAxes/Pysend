@@ -2,11 +2,11 @@
 This is a project for get data of serial arduino for AI analitics
 
 # Usage for development
-The first step you need install pyserial with pip or another method 
+The first step you need install pyserial with pip or another method, if you have Anaconda.
 
-    ~$ pip install pyserial
+   (conda env) ~$ pip install pyserial
 
-But existis another method for development, use the  **requeriments-dev.txt** with;
+But existis another method for development, that use the  **requeriments-dev.txt** with for you create you (venv)
 
-    ~$ pip install -r requeriments.txt
+    (myvenv) ~$ pip install -r requeriments.txt
 
