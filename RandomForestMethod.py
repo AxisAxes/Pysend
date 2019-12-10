@@ -1,8 +1,10 @@
+
 def build_model_forest(dataset_path, features_list, target, max_leaf_nodes, max_depth=None, n_estimators=None):
     import pandas as pd
     from sklearn.metrics import mean_absolute_error
     from sklearn.model_selection import train_test_split
-    from sklearn.ensemble import RandomForestRegressor
+    from sklearn.ensemble import RandomForestRegressor, plot_tree
+    from ScoreModels import score_model
 
     df = pd.read_csv(dataset_path)
     df.head()
@@ -28,4 +30,14 @@ def build_model_forest(dataset_path, features_list, target, max_leaf_nodes, max_
 
     print('Validation MAE for Random Forest Model with max_leaf_nodes: {:,.0f}'.format(rf_val_mae2))
 
+    plot1 = plot_tree(rf_model1)
+    plot2 = plot_tree(rf_model2)
+
+    a = [rf_model1, rf_model1 ]
+    list_of_model_maes = [score_model(i) for i in a ]
+    best_model = a[list_of_model_maes.index(min(list_of_model_maes))]
+
+    print('This is the best model : {}'.format(best_model))
         
+    print('Plot of model tree (not specifying max_leaf_nodes)\n\n{} '.format(plot1))
+    print('Plot of the model for best value of max_leaf_nodes\n\n{}'.format(plot2))

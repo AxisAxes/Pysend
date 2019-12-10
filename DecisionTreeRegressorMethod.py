@@ -3,7 +3,9 @@ def build_model_tree(dataset_path, features_list, target, max_leaf_nodes):
     import pandas as pd
     from sklearn.metrics import mean_absolute_error
     from sklearn.model_selection import train_test_split
-    from sklearn.tree import DecisionTreeRegressor
+    from sklearn.tree import DecisionTreeRegressor, plot_tree
+    from ScoreModels import score_model
+
 
     
     df = pd.read_csv(dataset_path)
@@ -26,3 +28,16 @@ def build_model_tree(dataset_path, features_list, target, max_leaf_nodes):
     val_predictions2 = dtree_model2.predict(val_X)
     val_mae = mean_absolute_error(val_predictions2, val_y)
     print('Validation MAE for best value of max_leaf_nodes: {:,.0f}'.format(val_mae))
+
+    plot1 = plot_tree(dtree_model1)
+    plot2 = plot_tree(dtree_model2)
+
+    a = [dtree_model1, dtree_model2 ]
+    list_of_model_maes = [score_model(i) for i in a ]
+    best_model = a[list_of_model_maes.index(min(list_of_model_maes))]
+
+    print('This is the best model : {}'.format(best_model))
+
+
+    print('Plot of model tree (not specifying max_leaf_nodes)\n\n{} '.format(plot1))
+    print('Plot of the model for best value of max_leaf_nodes\n\n{}'.format(plot2))
