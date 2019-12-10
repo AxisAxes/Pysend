@@ -1,7 +1,4 @@
-def score_model(model, X_t=X_train, X_v=X_valid, y_t=y_train, y_v=y_valid):
-    model.fit(X_t, y_t)
-    preds = model.predict(X_v)
-    return mean_absolute_error(y_v, preds)
+
 
 def build_model_tree(dataset_path, features_list, target, max_leaf_nodes):
     import pandas as pd
@@ -9,7 +6,10 @@ def build_model_tree(dataset_path, features_list, target, max_leaf_nodes):
     from sklearn.model_selection import train_test_split
     from sklearn.tree import DecisionTreeRegressor, plot_tree
 
-
+    def score_model(model, X_t=X_train, X_v=X_valid, y_t=y_train, y_v=y_valid):
+        model.fit(X_t, y_t)
+        preds = model.predict(X_v)
+        return mean_absolute_error(y_v, preds)
     
     df = pd.read_csv(dataset_path)
     df.head()
